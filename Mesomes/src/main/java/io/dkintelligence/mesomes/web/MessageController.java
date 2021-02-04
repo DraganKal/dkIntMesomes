@@ -30,5 +30,14 @@ public class MessageController {
         return new ResponseEntity<>(message1, HttpStatus.CREATED);
 
     }
+    @GetMapping("/received")
+    public Iterable<Message> getReceivedMessages(Principal principal){
+        return messageService.findAllReceivedMessages(principal.getName());
+    }
+    @GetMapping("/sent")
+    public Iterable<Message> getSentMessages(Principal principal){
+        return messageService.findAllSentMessages(principal.getName());
+    }
+
 
 }

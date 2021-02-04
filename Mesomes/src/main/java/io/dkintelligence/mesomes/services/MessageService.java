@@ -32,8 +32,14 @@ public class MessageService {
         }catch (Exception e){
             throw new UserNotFoundException("User with username '" + message.getRecipientUsername() + "' not found");
         }
+    }
 
+    public Iterable<Message> findAllReceivedMessages(String username){
+        return messageRepository.findAllByRecipientUsername(username);
+    }
 
+    public Iterable<Message> findAllSentMessages(String username){
+        return messageRepository.findAllBySenderUsername(username);
     }
 
 
