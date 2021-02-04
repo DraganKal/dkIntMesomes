@@ -7,8 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User implements UserDetails {
@@ -28,9 +30,12 @@ public class User implements UserDetails {
     private String confirmPassword;
     private Date created_At;
     private Date updated_At;
-//    OneToMany with Message sent
-
 //    OneToMany with Message received
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Message> receivedMessages = new ArrayList<>();
+//    OneToMany with Message sent
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Message> sentMessages = new ArrayList<>();
 
 //  Constructor
     public User() {
@@ -79,6 +84,32 @@ public class User implements UserDetails {
     public void setUpdated_At(Date updated_At) {
         this.updated_At = updated_At;
     }
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+    public void setReceivedMessages(List<Message> receivedMessages) {
+        this.receivedMessages = receivedMessages;
+    }
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+    public void setSentMessages(List<Message> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public void addReceivedMassage(Message message){
+        if(message.getRecipient() != this){
+            message.setRecipient(this);
+        }
+        receivedMessages.add(message);
+    }
+    public void addSentMessage(Message message){
+        if(message.getSender() != this){
+            message.setSender(this);
+        }
+        sentMessages.add(message);
+    }
+
 
     @PrePersist
     protected void onCreate(){
