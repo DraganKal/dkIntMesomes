@@ -1,6 +1,7 @@
 package io.dkintelligence.mesomes.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,8 @@ public class Message {
     private Long id;
     @NotBlank(message = "Message text is required")
     private String text;
+    @NotBlank(message = "Recipient username is required")
+    private String recipientUsername;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(updatable = false)
     private Date created_At;
@@ -21,9 +24,11 @@ public class Message {
     private Date updated_At;
 //    ManyToOne with User Recipient
     @ManyToOne(fetch=FetchType.EAGER)
+    @JsonIgnore
     private User recipient;
 //    ManyToOne with User Sender
     @ManyToOne(fetch=FetchType.EAGER)
+    @JsonIgnore
     private User sender;
 
 //    Constructors
@@ -43,6 +48,8 @@ public class Message {
     public void setText(String text) {
         this.text = text;
     }
+    public String getRecipientUsername() {return recipientUsername; }
+    public void setRecipientUsername(String recipientUsername) { this.recipientUsername = recipientUsername; }
     public Date getCreated_At() {
         return created_At;
     }
