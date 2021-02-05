@@ -16,6 +16,7 @@ import SecuredRoute from "./securityUtils/SecureRoute";
 import ReceivedMessages from "./components/messages/ReceivedMessages";
 import SentMessages from "./components/messages/SentMessages";
 import SendMessage from "./components/messages/SendMessage";
+import Footer from "./components/Layout/Footer";
 
 const jwtToken = localStorage.jwtToken;
 if (jwtToken) {
@@ -59,6 +60,7 @@ class App extends Component {
               <SecuredRoute exact path="/newMessage" component={SendMessage} />
             </Switch>
           </div>
+          <Footer />
         </Router>
       </Provider>
     );
