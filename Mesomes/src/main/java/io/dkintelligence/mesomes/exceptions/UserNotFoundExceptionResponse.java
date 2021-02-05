@@ -2,16 +2,17 @@ package io.dkintelligence.mesomes.exceptions;
 
 public class UserNotFoundExceptionResponse {
 
-    private String UserNotFound;
+    private String recipientUsername;
 
-    public UserNotFoundExceptionResponse(String userNotFound) {
-       this.UserNotFound = userNotFound;
+    public UserNotFoundExceptionResponse(String recipientUsername) {
+        this.recipientUsername = recipientUsername;
     }
 
-    public String getUserNotFound() {
-        return UserNotFound;
+    public String getRecipientUsername() {
+        return recipientUsername;
     }
-    public void setUserNotFound(String userNotFound) {
-        UserNotFound = userNotFound;
+
+    public void setRecipientUsername(String recipientUsername) {
+        this.recipientUsername = recipientUsername;
     }
 }

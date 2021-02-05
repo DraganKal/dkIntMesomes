@@ -17,6 +17,7 @@ public class Message {
     private String text;
     @NotBlank(message = "Recipient username is required")
     private String recipientUsername;
+    private String senderUsername;
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(updatable = false)
     private Date created_At;
@@ -70,6 +71,12 @@ public class Message {
         if(!recipient.getReceivedMessages().contains(this)){
             recipient.getReceivedMessages().add(this);
         }
+    }
+    public String getSenderUsername() {
+        return senderUsername;
+    }
+    public void setSenderUsername(String senderUsername) {
+        this.senderUsername = senderUsername;
     }
     public User getSender() {
         return sender;

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Component } from "react";
@@ -14,6 +13,9 @@ import Login from "./components/userManagement/Login";
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/SecurityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
+import ReceivedMessages from "./components/messages/ReceivedMessages";
+import SentMessages from "./components/messages/SentMessages";
+import SendMessage from "./components/messages/SendMessage";
 
 const jwtToken = localStorage.jwtToken;
 if (jwtToken) {
@@ -44,7 +46,18 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
 
-            <switch></switch>
+            {
+              //Private Routes
+            }
+            <Switch>
+              <SecuredRoute
+                exact
+                path="/received"
+                component={ReceivedMessages}
+              />
+              <SecuredRoute exact path="/sent" component={SentMessages} />
+              <SecuredRoute exact path="/newMessage" component={SendMessage} />
+            </Switch>
           </div>
         </Router>
       </Provider>

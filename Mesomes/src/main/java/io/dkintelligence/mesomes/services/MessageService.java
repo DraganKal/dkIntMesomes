@@ -25,12 +25,13 @@ public class MessageService {
             if(sender != null && recipient != null ) {
                 message.setSender(sender);
                 message.setRecipient(recipient);
+                message.setSenderUsername(username);
             }else{
-                throw new UserNotFoundException("User with username '" + message.getRecipientUsername() + "' not found");
+                throw new UserNotFoundException("User with email '" + message.getRecipientUsername() + "' not found");
             }
             return messageRepository.save(message);
         }catch (Exception e){
-            throw new UserNotFoundException("User with username '" + message.getRecipientUsername() + "' not found");
+            throw new UserNotFoundException("User with email '" + message.getRecipientUsername() + "' not found");
         }
     }
 
