@@ -12,6 +12,7 @@ class Header extends Component {
   }
   render() {
     const { validToken, user } = this.props.security;
+    // const userState = this.state.user;
 
     const userIsAuthenticated = (
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -105,7 +106,7 @@ class Header extends Component {
 
     let headerLinks;
 
-    if (validToken && user) {
+    if (validToken && user && user.roles === "SENT") {
       headerLinks = userIsAuthenticated;
     } else {
       headerLinks = userIsNotAuthenticated;
